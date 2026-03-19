@@ -1,15 +1,14 @@
 import { useLocation, Link } from 'react-router-dom';
-import { Home, Video, FileText, Flame, Briefcase, CreditCard, Settings, LogOut } from 'lucide-react';
+import { Home, Video, FileText, Briefcase, Flame, CreditCard, LogOut } from 'lucide-react';
 import { useAuth } from '@/features/auth';
 
 const NAV_ITEMS = [
   { path: '/dashboard', label: '홈', icon: Home },
-  { path: '/interview', label: '모의 면접', icon: Video },
-  { path: '/resumes', label: '이력서 관리', icon: FileText },
-  { path: '/streak', label: '나의 활동', icon: Flame },
-  { path: '/jobs', label: '채용 공고 (베타)', icon: Briefcase },
+  { path: '/interview', label: '면접 시작', icon: Video },
+  { path: '/resumes', label: '이력서', icon: FileText },
+  { path: '/jobs', label: '채용공고', icon: Briefcase },
+  { path: '/streak', label: '스트릭', icon: Flame },
   { path: '/subscription', label: '요금제', icon: CreditCard },
-  { path: '/settings', label: '설정', icon: Settings },
 ];
 
 export const Sidebar = () => {
