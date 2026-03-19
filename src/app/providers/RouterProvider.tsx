@@ -5,6 +5,7 @@ import { AuthLayout } from '../../shared/ui/Layout/AuthLayout';
 import LandingPage from '../../pages/LandingPage';
 import LoginPage from '../../pages/LoginPage';
 import SignUpPage from '../../pages/SignUpPage';
+import EmailVerificationPage from '../../pages/EmailVerificationPage';
 import { DashboardPage } from '../../pages/DashboardPage';
 import { ResumePage } from '../../pages/ResumePage';
 import { InterviewPage } from '../../pages/InterviewPage';
@@ -46,6 +47,7 @@ const router = createBrowserRouter([
     children: [
       { path: '/login', element: <LoginPage /> },
       { path: '/signup', element: <SignUpPage /> },
+      { path: '/verify-email', element: <EmailVerificationPage /> },
     ],
   },
 ]);
