@@ -1,52 +1,44 @@
-import { useEffect, useState } from 'react';
-import { Card } from '../../../shared/ui/Card';
-import { Badge } from '../../../shared/ui/Badge';
-import { Typography } from '../../../shared/ui/Typography';
-import { Button } from '../../../shared/ui/Button';
+import { useState, useEffect } from 'react';
+import { ResumeItem } from './ResumeItem';
+import { EmptyState } from '../../../shared/ui/WireframeComps';
 
-interface Resume {
+interface ResumeData {
   id: string;
   title: string;
   type: string;
-  isActive: boolean;
   createdAt: string;
 }
 
 export const ResumeList = () => {
-  const [resumes, setResumes] = useState<Resume[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [resumes, setResumes] = useState<ResumeData[]>([]);
 
   useEffect(() => {
     fetch('/api/resumes')
       .then(res => res.json())
-      .then(data => {
-        setResumes(data);
-        setLoading(false);
-      });
+      .then(data => setResumes(data))
+      .catch(console.error);
   }, []);
 
-  if (loading) return <Typography>Loading resumes...</Typography>;
-  if (resumes.length === 0) return <Typography color="muted">No resumes found. Please upload one.</Typography>;
+  if (resumes.length === 0) {
+    return (
+      <EmptyState 
+        icon="📭" 
+        title="아직 항목이 없습니다" 
+        desc="새 항목을 추가해보세요." 
+        btnText="+ 추가하기"
+        onAction={() => window.scrollTo(0, document.body.scrollHeight)}
+      />
+    );
+  }
 
   return (
-    <div className="flex flex-col gap-4">
-      {resumes.map(resume => (
-        <Card key={resume.id} className="p-4 flex items-center justify-between hover:bg-muted-bg transition-colors">
-          <div className="flex flex-col gap-2">
-            <div className="flex items-center gap-2">
-              <Typography weight="semibold">{resume.title}</Typography>
-              {resume.isActive && <Badge variant="success">Active</Badge>}
-              <Badge variant="outline">{resume.type}</Badge>
-            </div>
-            <Typography variant="caption" color="muted">
-              Uploaded at {new Date(resume.createdAt).toLocaleDateString()}
-            </Typography>
-          </div>
-          <div className="flex items-center gap-2">
-            {!resume.isActive && <Button variant="text" size="sm">Set Active</Button>}
-            <Button variant="outline" size="sm" className="text-error border-error hover:bg-red-50">Delete</Button>
-          </div>
-        </Card>
+    <div className="flex flex-col gap-4 w-full">
+      {resumes.map(r => (
+        <ResumeItem 
+          key={r.id} 
+          title={r.title} 
+          meta={`${r.type === 'file' ? '파일 업로드' : '직접 입력'} · 분석 완료 · ${new Date(r.createdAt).toLocaleDateString()}`}
+        />
       ))}
     </div>
   );

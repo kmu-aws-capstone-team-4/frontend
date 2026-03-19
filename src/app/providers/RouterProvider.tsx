@@ -1,5 +1,7 @@
 import { createBrowserRouter, RouterProvider as Router, Navigate } from 'react-router-dom';
-import { MainLayout, AuthLayout } from '../../shared/ui/Layout';
+import { AppLayout } from '../../shared/ui/Layout/AppLayout';
+import { LandingLayout } from '../../shared/ui/Layout/LandingLayout';
+import { AuthLayout } from '../../shared/ui/Layout/AuthLayout';
 import LandingPage from '../../pages/LandingPage';
 import LoginPage from '../../pages/LoginPage';
 import SignUpPage from '../../pages/SignUpPage';
@@ -17,9 +19,14 @@ const ProtectedRoute = ({ children }: { children: ReactNode }) => {
 
 const router = createBrowserRouter([
   {
-    element: <MainLayout />,
+    element: <LandingLayout />,
     children: [
       { path: '/', element: <LandingPage /> },
+    ]
+  },
+  {
+    element: <AppLayout />,
+    children: [
       { 
         path: '/dashboard', 
         element: <ProtectedRoute><DashboardPage /></ProtectedRoute> 
