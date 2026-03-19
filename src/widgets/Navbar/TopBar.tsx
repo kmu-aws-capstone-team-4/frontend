@@ -1,39 +1,22 @@
-import { Bell } from 'lucide-react';
-import { Button } from '@/shared/ui/Button';
-import { useLocation } from 'react-router-dom';
+import { Menu } from 'lucide-react';
+import { useLayoutStore } from '@/shared/store/layout';
 
-const getPageTitle = (path: string) => {
-  if (path.includes('/dashboard')) return '대시보드';
-  if (path.includes('/resume')) return '이력서 관리';
-  if (path.includes('/streak')) return '나의 활동';
-  if (path.includes('/jobs')) return '채용 공고 (베타)';
-  if (path.includes('/subscription')) return '요금제';
-  if (path.includes('/settings')) return '설정';
-  return '모의 면접'; // Default or interview
-};
-
-export const TopBar = ({ showBadge = false }: { showBadge?: boolean }) => {
-  const { pathname } = useLocation();
-  const title = getPageTitle(pathname);
+export const TopBar = () => {
+  const { openSidebar } = useLayoutStore();
   
   return (
-    <header className="h-[64px] bg-card-bg border-b border-border flex items-center justify-between px-10 w-full shrink-0">
-      {/* tbLeft */}
-      <div className="flex items-center gap-2">
-        <h1 className="text-text-primary font-inter text-[20px] font-bold">{title}</h1>
-        {showBadge && (
-          <div className="h-6 px-2.5 bg-accent-light text-accent rounded-xl flex items-center justify-center font-inter text-[12px] font-semibold">
-            PRO
-          </div>
-        )}
-      </div>
-
-      {/* tbRight */}
-      <div className="flex items-center gap-2">
-        <Button variant="outline" className="h-9 px-4 gap-1.5 border-border rounded-lg text-[13px] font-medium text-text-secondary">
-          <Bell size={16} />
-          알림
-        </Button>
+    <header className="h-[52px] md:h-[56px] lg:hidden bg-sidebar-bg border-b border-border flex items-center justify-between px-5 shrink-0 z-30">
+      <div className="flex items-center gap-4">
+        <button 
+          onClick={openSidebar}
+          className="w-9 h-9 flex items-center justify-center rounded-lg hover:bg-muted-bg text-text-primary transition-colors"
+        >
+          <Menu size={20} />
+        </button>
+        <div className="flex items-center gap-2">
+          <div className="w-6 h-6 rounded-md bg-accent shrink-0" />
+          <span className="text-text-primary font-inter text-[15px] font-bold">MeFit</span>
+        </div>
       </div>
     </header>
   );

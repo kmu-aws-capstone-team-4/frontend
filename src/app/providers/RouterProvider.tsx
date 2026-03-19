@@ -9,6 +9,7 @@ import EmailVerificationPage from '@/pages/EmailVerificationPage';
 import { DashboardPage } from '@/pages/DashboardPage';
 import { ResumePage } from '@/pages/ResumePage';
 import { InterviewPage } from '@/pages/InterviewPage';
+import { JobsPage } from '@/pages/JobsPage';
 import { useAuth } from '@/features/auth';
 import type { ReactNode } from 'react';
 
@@ -39,6 +40,10 @@ const router = createBrowserRouter([
       { 
         path: '/interview', 
         element: <ProtectedRoute><InterviewPage /></ProtectedRoute> 
+      },
+      { 
+        path: '/jobs', 
+        element: <ProtectedRoute><JobsPage /></ProtectedRoute> 
       },
     ],
   },

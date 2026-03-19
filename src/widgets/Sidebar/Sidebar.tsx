@@ -1,6 +1,7 @@
 import { useLocation, Link } from 'react-router-dom';
-import { Home, Video, FileText, Briefcase, Flame, CreditCard, LogOut } from 'lucide-react';
+import { Home, Video, FileText, Briefcase, Flame, CreditCard, LogOut, PanelLeftClose } from 'lucide-react';
 import { useAuth } from '@/features/auth';
+import { useLayoutStore } from '@/shared/store/layout';
 
 const NAV_ITEMS = [
   { path: '/dashboard', label: '홈', icon: Home },
@@ -14,14 +15,36 @@ const NAV_ITEMS = [
 export const Sidebar = () => {
   const { pathname } = useLocation();
   const { user, logout } = useAuth();
+  const { isSidebarOpen, closeSidebar } = useLayoutStore();
 
   return (
-    <aside className="w-[240px] h-screen bg-sidebar-bg border-r border-border flex flex-col py-6 sticky top-0 shrink-0">
-      {/* logo */}
-      <div className="flex items-center gap-2 h-12 px-5 w-full mb-1">
-        <div className="w-7 h-7 rounded-md bg-accent shrink-0" />
-        <span className="text-text-primary font-inter text-[16px] font-bold">MeFit</span>
-      </div>
+    <>
+      {/* Mobile Overlay */}
+      {isSidebarOpen && (
+        <div 
+          className="fixed inset-0 bg-black/50 z-40 lg:hidden"
+          onClick={closeSidebar}
+        />
+      )}
+
+      <aside 
+        className={`fixed lg:sticky top-0 left-0 w-[240px] md:w-[280px] lg:w-[240px] h-screen bg-sidebar-bg border-r border-border flex flex-col py-6 shrink-0 z-50 transition-transform duration-300 ease-in-out ${
+          isSidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'
+        }`}
+      >
+        {/* logo and closeBtn */}
+        <div className="flex items-center justify-between px-5 w-full mb-1 h-12">
+          <div className="flex items-center gap-2">
+            <div className="w-7 h-7 rounded-md bg-accent shrink-0" />
+            <span className="text-text-primary font-inter text-[16px] font-bold">MeFit</span>
+          </div>
+          <button 
+            onClick={closeSidebar}
+            className="lg:hidden w-7 h-7 flex items-center justify-center rounded-md hover:bg-muted-bg text-text-secondary transition-colors"
+          >
+            <PanelLeftClose size={16} />
+          </button>
+        </div>
       
       {/* divider */}
       <div className="w-full h-[1px] bg-border mb-2" />
@@ -61,5 +84,6 @@ export const Sidebar = () => {
         </div>
       </div>
     </aside>
+    </>
   );
 };
