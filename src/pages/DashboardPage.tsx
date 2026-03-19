@@ -1,7 +1,7 @@
-import { Typography } from '../shared/ui/Typography';
-import { StatCard, PageHeader } from '../shared/ui/WireframeComps';
-import { StreaksDisplay, ProfileEditForm } from '../features/profile';
-import { useAuth } from '../features/auth';
+import { Typography } from '@/shared/ui/Typography';
+import { StatCard, PageHeader } from '@/shared/ui/WireframeComps';
+import { StreaksDisplay, ProfileEditForm } from '@/features/profile';
+import { useAuth } from '@/features/auth';
 
 export const DashboardPage = () => {
   const { user } = useAuth();

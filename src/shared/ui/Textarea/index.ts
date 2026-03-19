@@ -1,2 +1,2 @@
-export { Textarea } from './Textarea';
-export type { TextareaProps } from './Textarea';
+export { Textarea } from '@/shared/ui/Textarea/Textarea';
+export type { TextareaProps } from '@/shared/ui/Textarea/Textarea';

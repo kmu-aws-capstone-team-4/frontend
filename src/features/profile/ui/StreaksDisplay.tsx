@@ -1,6 +1,6 @@
-import { Card } from '../../../shared/ui/Card';
-import { Typography } from '../../../shared/ui/Typography';
-import { Icon } from '../../../shared/ui/Icon';
+import { Card } from '@/shared/ui/Card';
+import { Typography } from '@/shared/ui/Typography';
+import { Icon } from '@/shared/ui/Icon';
 import { Flame } from 'lucide-react';
 
 export const StreaksDisplay = ({ streakCount = 0 }: { streakCount?: number }) => {

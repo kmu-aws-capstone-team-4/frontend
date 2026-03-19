@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import { Button } from '../Button';
+import { Button } from '@/shared/ui/Button';
 
 export const StatCard = ({ label, value, sub }: { label: string; value: string | number; sub?: ReactNode }) => {
   return (

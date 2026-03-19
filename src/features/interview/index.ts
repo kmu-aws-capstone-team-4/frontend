@@ -1,2 +1,2 @@
-export { InterviewSetupForm } from './ui/InterviewSetupForm';
-export { InterviewSession } from './ui/InterviewSession';
+export { InterviewSetupForm } from '@/features/interview/ui/InterviewSetupForm';
+export { InterviewSession } from '@/features/interview/ui/InterviewSession';

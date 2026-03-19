@@ -1,15 +1,15 @@
 import { createBrowserRouter, RouterProvider as Router, Navigate } from 'react-router-dom';
-import { AppLayout } from '../../shared/ui/Layout/AppLayout';
-import { LandingLayout } from '../../shared/ui/Layout/LandingLayout';
-import { AuthLayout } from '../../shared/ui/Layout/AuthLayout';
-import LandingPage from '../../pages/LandingPage';
-import LoginPage from '../../pages/LoginPage';
-import SignUpPage from '../../pages/SignUpPage';
-import EmailVerificationPage from '../../pages/EmailVerificationPage';
-import { DashboardPage } from '../../pages/DashboardPage';
-import { ResumePage } from '../../pages/ResumePage';
-import { InterviewPage } from '../../pages/InterviewPage';
-import { useAuth } from '../../features/auth';
+import { AppLayout } from '@/shared/ui/Layout/AppLayout';
+import { LandingLayout } from '@/shared/ui/Layout/LandingLayout';
+import { AuthLayout } from '@/shared/ui/Layout/AuthLayout';
+import LandingPage from '@/pages/LandingPage';
+import LoginPage from '@/pages/LoginPage';
+import SignUpPage from '@/pages/SignUpPage';
+import EmailVerificationPage from '@/pages/EmailVerificationPage';
+import { DashboardPage } from '@/pages/DashboardPage';
+import { ResumePage } from '@/pages/ResumePage';
+import { InterviewPage } from '@/pages/InterviewPage';
+import { useAuth } from '@/features/auth';
 import type { ReactNode } from 'react';
 
 const ProtectedRoute = ({ children }: { children: ReactNode }) => {

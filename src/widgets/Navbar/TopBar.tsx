@@ -1,5 +1,5 @@
 import { Bell } from 'lucide-react';
-import { Button } from '../../shared/ui/Button';
+import { Button } from '@/shared/ui/Button';
 import { useLocation } from 'react-router-dom';
 
 const getPageTitle = (path: string) => {

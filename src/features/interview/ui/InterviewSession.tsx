@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
-import { Card } from '../../../shared/ui/Card';
-import { Typography } from '../../../shared/ui/Typography';
-import { Button } from '../../../shared/ui/Button';
-import { Avatar } from '../../../shared/ui/Avatar';
-import { Icon } from '../../../shared/ui/Icon';
+import { Card } from '@/shared/ui/Card';
+import { Typography } from '@/shared/ui/Typography';
+import { Button } from '@/shared/ui/Button';
+import { Avatar } from '@/shared/ui/Avatar';
+import { Icon } from '@/shared/ui/Icon';
 import { Mic, Video, PhoneOff } from 'lucide-react';
 
 export const InterviewSession = ({ onEnd }: { onEnd: () => void }) => {

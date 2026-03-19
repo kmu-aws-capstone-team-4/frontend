@@ -1,2 +1,2 @@
-export { ProfileEditForm } from './ui/ProfileEditForm';
-export { StreaksDisplay } from './ui/StreaksDisplay';
+export { ProfileEditForm } from '@/features/profile/ui/ProfileEditForm';
+export { StreaksDisplay } from '@/features/profile/ui/StreaksDisplay';

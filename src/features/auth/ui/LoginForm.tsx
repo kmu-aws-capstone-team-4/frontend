@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { useAuth } from '../model/useAuth';
-import { useToast } from '../../../shared/ui/Toast';
+import { useAuth } from '@/features/auth/model/useAuth';
+import { useToast } from '@/shared/ui/Toast';
 
 export const LoginForm = () => {
   const [email, setEmail] = useState('hong@example.com');

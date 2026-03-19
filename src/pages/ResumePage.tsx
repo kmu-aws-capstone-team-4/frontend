@@ -1,5 +1,5 @@
-import { Typography } from '../shared/ui/Typography';
-import { ResumeList, ResumeUploadForm } from '../features/resume';
+import { Typography } from '@/shared/ui/Typography';
+import { ResumeList, ResumeUploadForm } from '@/features/resume';
 
 export const ResumePage = () => {
   return (

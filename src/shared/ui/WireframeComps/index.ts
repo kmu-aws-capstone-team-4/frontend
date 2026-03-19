@@ -1,1 +1,1 @@
-export * from './WireframeComps';
+export * from '@/shared/ui/WireframeComps/WireframeComps';

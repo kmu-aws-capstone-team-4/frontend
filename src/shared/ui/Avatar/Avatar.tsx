@@ -1,4 +1,5 @@
-import { ImgHTMLAttributes, forwardRef, useState } from 'react';
+import { forwardRef, useState } from 'react';
+import type { ImgHTMLAttributes } from 'react';
 
 export interface AvatarProps extends ImgHTMLAttributes<HTMLImageElement> {
   size?: 'sm' | 'md' | 'lg' | 'xl';

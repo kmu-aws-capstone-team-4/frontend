@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { Card } from '../../../shared/ui/Card';
-import { Select } from '../../../shared/ui/Select';
-import { Button } from '../../../shared/ui/Button';
-import { PageHeader, CheckItem } from '../../../shared/ui/WireframeComps';
+import { Card } from '@/shared/ui/Card';
+import { Select } from '@/shared/ui/Select';
+import { Button } from '@/shared/ui/Button';
+import { PageHeader, CheckItem } from '@/shared/ui/WireframeComps';
 
 export const InterviewSetupForm = ({ onStart }: { onStart?: (settings: Record<string, unknown>) => void }) => {
   const [selectedResume, setSelectedResume] = useState('r1');

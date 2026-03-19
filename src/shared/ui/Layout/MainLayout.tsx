@@ -1,9 +1,9 @@
 import { Outlet, Link } from 'react-router-dom';
-import { Typography } from '../Typography';
-import { Button } from '../Button';
-import { Avatar } from '../Avatar';
-import { useAuth } from '../../../features/auth';
-import { Icon } from '../Icon';
+import { Typography } from '@/shared/ui/Typography';
+import { Button } from '@/shared/ui/Button';
+import { Avatar } from '@/shared/ui/Avatar';
+import { useAuth } from '@/features/auth';
+import { Icon } from '@/shared/ui/Icon';
 import { Flame } from 'lucide-react';
 
 export const MainLayout = () => {
@@ -13,7 +13,7 @@ export const MainLayout = () => {
     <div className="min-h-screen bg-bg text-text-primary flex flex-col">
       <header className="h-16 border-b border-border bg-nav-bg flex items-center justify-between px-6 sticky top-0 z-40">
         <Link to="/" className="flex items-center gap-2">
-          <Typography variant="h3" weight="bold" color="accent">Everyday Mail</Typography>
+          <Typography variant="h3" weight="bold" color="accent">MeFit</Typography>
         </Link>
         <nav className="flex items-center gap-4">
           {isAuthenticated ? (

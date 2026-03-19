@@ -1,6 +1,6 @@
 import { Outlet } from 'react-router-dom';
-import { Sidebar } from '../../../widgets/Sidebar/Sidebar';
-import { TopBar } from '../../../widgets/Navbar/TopBar';
+import { Sidebar } from '@/widgets/Sidebar/Sidebar';
+import { TopBar } from '@/widgets/Navbar/TopBar';
 
 export const AppLayout = () => {
   return (

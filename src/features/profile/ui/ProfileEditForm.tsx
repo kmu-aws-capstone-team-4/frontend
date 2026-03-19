@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { Input } from '../../../shared/ui/Input';
-import { Button } from '../../../shared/ui/Button';
-import { Avatar } from '../../../shared/ui/Avatar';
-import { useToast } from '../../../shared/ui/Toast';
+import { Input } from '@/shared/ui/Input';
+import { Button } from '@/shared/ui/Button';
+import { Avatar } from '@/shared/ui/Avatar';
+import { useToast } from '@/shared/ui/Toast';
 export const ProfileEditForm = () => {
   const [nickname, setNickname] = useState('TestUser');
   const [jobCategory, setJobCategory] = useState('Frontend Developer');

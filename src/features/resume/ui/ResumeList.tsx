@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import { ResumeItem } from './ResumeItem';
-import { EmptyState } from '../../../shared/ui/WireframeComps';
+import { ResumeItem } from '@/features/resume/ui/ResumeItem';
+import { EmptyState } from '@/shared/ui/WireframeComps';
 
 interface ResumeData {
   id: string;

@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Icon } from './Icon';
+import { Icon } from '@/shared/ui/Icon/Icon';
 import { Home, User, Settings, CheckCircle, AlertTriangle } from 'lucide-react';
 
 const meta = {

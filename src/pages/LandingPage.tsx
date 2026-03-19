@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
-import { Button } from '../shared/ui/Button';
-import { PlanCard, TestimonialCard, FeatureCard } from '../shared/ui/WireframeComps';
+import { Button } from '@/shared/ui/Button';
+import { PlanCard, TestimonialCard, FeatureCard } from '@/shared/ui/WireframeComps';
 
 export const LandingPage = () => {
   return (

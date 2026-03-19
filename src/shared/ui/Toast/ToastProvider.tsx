@@ -1,4 +1,4 @@
-import { useToast } from './useToast';
+import { useToast } from '@/shared/ui/Toast/useToast';
 import { X, CheckCircle, AlertCircle, Info, AlertTriangle } from 'lucide-react';
 
 const icons = {

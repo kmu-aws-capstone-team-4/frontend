@@ -1,6 +1,5 @@
-import './App.css'
-import { AppRouterProvider } from './providers/RouterProvider'
-import { ToastProvider } from '../shared/ui/Toast'
+import { AppRouterProvider } from '@/app/providers/RouterProvider'
+import { ToastProvider } from '@/shared/ui/Toast'
 
 function App() {
   return (

@@ -1,11 +1,11 @@
 import { useState } from 'react';
-import { Card } from '../../../shared/ui/Card';
-import { Input } from '../../../shared/ui/Input';
-import { Textarea } from '../../../shared/ui/Textarea';
-import { Button } from '../../../shared/ui/Button';
-import { useToast } from '../../../shared/ui/Toast';
-import { Typography } from '../../../shared/ui/Typography';
-import { Icon } from '../../../shared/ui/Icon';
+import { Card } from '@/shared/ui/Card';
+import { Input } from '@/shared/ui/Input';
+import { Textarea } from '@/shared/ui/Textarea';
+import { Button } from '@/shared/ui/Button';
+import { useToast } from '@/shared/ui/Toast';
+import { Typography } from '@/shared/ui/Typography';
+import { Icon } from '@/shared/ui/Icon';
 import { Upload } from 'lucide-react';
 
 export const ResumeUploadForm = ({ onSuccess }: { onSuccess?: () => void }) => {

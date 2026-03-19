@@ -1,2 +1,2 @@
-export { Select } from './Select';
-export type { SelectProps } from './Select';
+export { Select } from '@/shared/ui/Select/Select';
+export type { SelectProps } from '@/shared/ui/Select/Select';

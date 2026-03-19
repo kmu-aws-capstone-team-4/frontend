@@ -1,11 +1,12 @@
 import { useState } from 'react';
-import { useToast } from '../../../shared/ui/Toast';
+import { useToast } from '@/shared/ui/Toast';
 import { useNavigate } from 'react-router-dom';
 
 export const SignUpForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [agreed, setAgreed] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const { addToast } = useToast();
   const navigate = useNavigate();
@@ -14,6 +15,10 @@ export const SignUpForm = () => {
     e.preventDefault();
     if (password !== confirmPassword) {
       addToast({ type: 'error', title: '검증 오류', message: '비밀번호가 일치하지 않습니다.' });
+      return;
+    }
+    if (!agreed) {
+      addToast({ type: 'error', title: '동의 필요', message: '이용약관 및 개인정보처리방침에 동의해주세요.' });
       return;
     }
 
@@ -57,7 +62,7 @@ export const SignUpForm = () => {
         <input
           type="password"
           className="h-12 px-4 rounded-[10px] border border-border bg-card-bg text-text-primary placeholder:text-text-muted text-[14px] font-inter focus:outline-none focus:border-accent transition-colors"
-          placeholder="비밀번호를 생성하세요"
+          placeholder="8자 이상 입력하세요"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
@@ -74,6 +79,20 @@ export const SignUpForm = () => {
           required
         />
       </div>
+      
+      <div className="flex items-center gap-2 mt-1">
+        <input 
+          type="checkbox" 
+          id="terms" 
+          checked={agreed} 
+          onChange={(e) => setAgreed(e.target.checked)} 
+          className="w-4 h-4 rounded border-border text-accent focus:ring-accent" 
+        />
+        <label htmlFor="terms" className="text-text-secondary font-inter text-[13px] cursor-pointer">
+          이용약관 및 개인정보처리방침에 동의합니다
+        </label>
+      </div>
+
       <button
         type="submit"
         disabled={isLoading}

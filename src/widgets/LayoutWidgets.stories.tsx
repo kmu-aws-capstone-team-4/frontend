@@ -1,8 +1,8 @@
 import type { Meta } from '@storybook/react';
-import { Sidebar } from './Sidebar/Sidebar';
-import { TopBar } from './Navbar/TopBar';
-import { LandingNavbar } from './Navbar/LandingNavbar';
-import { LandingFooter } from './Footer/LandingFooter';
+import { Sidebar } from '@/widgets/Sidebar/Sidebar';
+import { TopBar } from '@/widgets/Navbar/TopBar';
+import { LandingNavbar } from '@/widgets/Navbar/LandingNavbar';
+import { LandingFooter } from '@/widgets/Footer/LandingFooter';
 import { BrowserRouter } from 'react-router-dom';
 
 const meta = {

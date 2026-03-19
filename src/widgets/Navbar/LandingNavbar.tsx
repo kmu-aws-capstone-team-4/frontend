@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Button } from '../../shared/ui/Button';
+import { Button } from '@/shared/ui/Button';
 
 export const LandingNavbar = () => {
   return (

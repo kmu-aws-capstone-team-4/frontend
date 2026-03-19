@@ -1,3 +1,3 @@
-export { ToastProvider } from './ToastProvider';
-export { useToast } from './useToast';
-export type { ToastType, ToastMessage } from './useToast';
+export { ToastProvider } from '@/shared/ui/Toast/ToastProvider';
+export { useToast } from '@/shared/ui/Toast/useToast';
+export type { ToastType, ToastMessage } from '@/shared/ui/Toast/useToast';

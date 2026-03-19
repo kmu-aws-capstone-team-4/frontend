@@ -1,6 +1,6 @@
 import { useLocation, Link } from 'react-router-dom';
 import { Home, Video, FileText, Flame, Briefcase, CreditCard, Settings, LogOut } from 'lucide-react';
-import { useAuth } from '../../features/auth';
+import { useAuth } from '@/features/auth';
 
 const NAV_ITEMS = [
   { path: '/dashboard', label: '홈', icon: Home },

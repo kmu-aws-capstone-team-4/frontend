@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { InterviewSetupForm, InterviewSession } from '../features/interview';
-import { Typography } from '../shared/ui/Typography';
+import { InterviewSetupForm, InterviewSession } from '@/features/interview';
+import { Typography } from '@/shared/ui/Typography';
 import { useNavigate } from 'react-router-dom';
 
 export const InterviewPage = () => {

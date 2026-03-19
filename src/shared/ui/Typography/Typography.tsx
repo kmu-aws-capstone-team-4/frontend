@@ -1,4 +1,4 @@
-import { ElementType, HTMLAttributes } from 'react';
+import type { ElementType, HTMLAttributes } from 'react';
 
 export type TypographyVariant = 'h1' | 'h2' | 'h3' | 'h4' | 'subtitle' | 'body' | 'caption';
 export type TypographyColor = 'primary' | 'secondary' | 'muted' | 'accent' | 'error' | 'success';
