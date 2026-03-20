@@ -1,5 +1,5 @@
 import { useLocation, Link } from 'react-router-dom';
-import { Home, Video, FileText, Briefcase, Flame, CreditCard, LogOut, PanelLeftClose } from 'lucide-react';
+import { Home, Video, FileText, Briefcase, Flame, CreditCard, Settings, LogOut, PanelLeftClose } from 'lucide-react';
 import { useAuth } from '@/features/auth';
 import { useLayoutStore } from '@/shared/store/layout';
 
@@ -10,6 +10,7 @@ const NAV_ITEMS = [
   { path: '/jobs', label: '채용공고', icon: Briefcase },
   { path: '/streak', label: '스트릭', icon: Flame },
   { path: '/subscription', label: '요금제', icon: CreditCard },
+  { path: '/settings', label: '설정', icon: Settings },
 ];
 
 export const Sidebar = () => {

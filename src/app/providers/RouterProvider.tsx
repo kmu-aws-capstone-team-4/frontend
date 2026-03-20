@@ -8,8 +8,16 @@ import SignUpPage from '@/pages/SignUpPage';
 import EmailVerificationPage from '@/pages/EmailVerificationPage';
 import { DashboardPage } from '@/pages/DashboardPage';
 import { ResumePage } from '@/pages/ResumePage';
+import { ResumeUploadPage } from '@/pages/ResumeUploadPage';
+import { ResumeInputPage } from '@/pages/ResumeInputPage';
+import { StreakPage } from '@/pages/StreakPage';
+import { SettingsPage } from '@/pages/SettingsPage';
+import { SubscriptionPage } from '@/pages/SubscriptionPage';
 import { InterviewPage } from '@/pages/InterviewPage';
 import { JobsPage } from '@/pages/JobsPage';
+import { JobAddPage } from '@/pages/JobAddPage';
+import { JobEditPage } from '@/pages/JobEditPage';
+import { JobDetailPage } from '@/pages/JobDetailPage';
 import { useAuth } from '@/features/auth';
 import type { ReactNode } from 'react';
 
@@ -38,12 +46,44 @@ const router = createBrowserRouter([
         element: <ProtectedRoute><ResumePage /></ProtectedRoute> 
       },
       { 
+        path: '/resumes/upload', 
+        element: <ProtectedRoute><ResumeUploadPage /></ProtectedRoute> 
+      },
+      { 
+        path: '/resumes/input', 
+        element: <ProtectedRoute><ResumeInputPage /></ProtectedRoute> 
+      },
+      { 
         path: '/interview', 
         element: <ProtectedRoute><InterviewPage /></ProtectedRoute> 
       },
       { 
+        path: '/streak', 
+        element: <ProtectedRoute><StreakPage /></ProtectedRoute> 
+      },
+      { 
+        path: '/settings', 
+        element: <ProtectedRoute><SettingsPage /></ProtectedRoute> 
+      },
+      { 
+        path: '/subscription', 
+        element: <ProtectedRoute><SubscriptionPage /></ProtectedRoute> 
+      },
+      { 
         path: '/jobs', 
         element: <ProtectedRoute><JobsPage /></ProtectedRoute> 
+      },
+      { 
+        path: '/jobs/add', 
+        element: <ProtectedRoute><JobAddPage /></ProtectedRoute> 
+      },
+      { 
+        path: '/jobs/:uuid', 
+        element: <ProtectedRoute><JobDetailPage /></ProtectedRoute> 
+      },
+      { 
+        path: '/jobs/:uuid/edit', 
+        element: <ProtectedRoute><JobEditPage /></ProtectedRoute> 
       },
     ],
   },

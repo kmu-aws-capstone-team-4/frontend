@@ -1,33 +1,24 @@
 import { Typography } from '@/shared/ui/Typography';
 import { Button } from '@/shared/ui/Button';
-import { Search } from 'lucide-react';
+import { Search, Plus } from 'lucide-react';
 import { Input } from '@/shared/ui/Input';
-
-const JobCardPlaceholder = ({ title, company, status }: { title: string, company: string, status: string }) => (
-  <div className="flex flex-col gap-4 p-6 rounded-2xl border border-border bg-card-bg w-full">
-    <div className="flex justify-between items-start">
-      <div className="flex flex-col gap-1">
-        <Typography variant="body" weight="semibold">{title}</Typography>
-        <Typography variant="caption" className="text-text-secondary">{company}</Typography>
-      </div>
-      <div className="px-2.5 py-1 bg-muted-bg text-text-secondary rounded-md text-xs font-medium">
-        {status}
-      </div>
-    </div>
-    <div className="flex justify-between items-center mt-2">
-      <Typography variant="caption" className="text-text-muted">마감일: 2026.04.15</Typography>
-      <Button variant="outline" size="sm">상세 보기</Button>
-    </div>
-  </div>
-);
+import { JobCard } from '@/widgets/ResourceCard/JobCard';
+import { Link, useNavigate } from 'react-router-dom';
 
 export const JobsPage = () => {
+  const navigate = useNavigate();
+
   return (
     <div className="flex flex-col gap-7 max-w-6xl mx-auto w-full">
       {/* Top Bar */}
       <div className="flex items-center justify-between w-full">
         <Typography variant="h3" weight="bold">채용공고 관리</Typography>
-        <Button variant="primary" className="shadow-orange-400/30 shadow-lg">+ 채용공고 추가</Button>
+        <Link to="/jobs/add">
+          <Button variant="primary" className="shadow-orange-400/30 shadow-lg px-5 gap-2">
+            <Plus size={18} />
+            채용공고 추가
+          </Button>
+        </Link>
       </div>
 
       {/* Filter Row */}
@@ -49,9 +40,22 @@ export const JobsPage = () => {
 
       {/* Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
-        <JobCardPlaceholder title="프론트엔드 엔지니어" company="토스 (Toss)" status="지원 예정" />
-        <JobCardPlaceholder title="백엔드 개발자" company="네이버 (NAVER)" status="지원 완료" />
-        <JobCardPlaceholder title="React Native 주니어" company="카카오 (Kakao)" status="관심 저장" />
+        <JobCard 
+          title="프론트엔드 엔지니어" company="토스 (Toss)" status="지원 예정" deadline="2026.04.15" 
+          onViewDetail={() => navigate('/jobs/123e4567-e89b-12d3-a456-426614174000')}
+        />
+        <JobCard 
+          title="UX/UI 디자이너" company="당근마켓 (Daangn)" status="분석 중" deadline="2026.05.01" 
+          onViewDetail={() => navigate('/jobs/analyzing')}
+        />
+        <JobCard 
+          title="백엔드 개발자" company="네이버 (NAVER)" status="지원 완료" deadline="2026.04.01" 
+          onViewDetail={() => navigate('/jobs/987e6543-e21b-12d3-a456-426614174111')}
+        />
+        <JobCard 
+          title="React Native 주니어" company="카카오 (Kakao)" status="관심 저장" deadline="2026.05.15" 
+          onViewDetail={() => navigate('/jobs/555e4444-e33b-12d3-a456-426614174222')}
+        />
       </div>
     </div>
   );
