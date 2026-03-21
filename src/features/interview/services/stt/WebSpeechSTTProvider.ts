@@ -1,20 +1,22 @@
 import type { ISTTProvider, STTResult } from './STTProvider';
 
 export class WebSpeechSTTProvider implements ISTTProvider {
-  private recognition: SpeechRecognition | null = null;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  private recognition: any;
   private resultCallback?: (result: STTResult) => void;
   private errorCallback?: (error: unknown) => void;
   private isIntentionalStop = false;
 
   constructor() {
-    const SpeechRecognitionCtor =
-      window.SpeechRecognition || (window as unknown as { webkitSpeechRecognition: typeof SpeechRecognition }).webkitSpeechRecognition;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const SpeechRecognitionCtor = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
     if (SpeechRecognitionCtor) {
       this.recognition = new SpeechRecognitionCtor();
       this.recognition.continuous = true;
       this.recognition.interimResults = true;
 
-      this.recognition.onresult = (event: SpeechRecognitionEvent) => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      this.recognition.onresult = (event: any) => {
         let interimTranscript = '';
         let finalTranscript = '';
 
@@ -36,7 +38,8 @@ export class WebSpeechSTTProvider implements ISTTProvider {
         }
       };
 
-      this.recognition.onerror = (event: SpeechRecognitionErrorEvent) => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      this.recognition.onerror = (event: any) => {
         if (event.error === 'no-speech') return;
         this.errorCallback?.(event.error);
       };

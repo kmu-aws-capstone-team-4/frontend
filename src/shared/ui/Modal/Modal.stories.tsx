@@ -1,5 +1,5 @@
 import type { Meta } from '@storybook/react';
-import { Modal } from '@/shared/ui/Modal/Modal';
+import { Modal } from './Modal';
 import { useState } from 'react';
 import { Button } from '@/shared/ui/Button';
 
