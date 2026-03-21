@@ -3,6 +3,7 @@ import { useToast } from '@/shared/ui/Toast';
 import { useNavigate } from 'react-router-dom';
 
 export const SignUpForm = () => {
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -27,7 +28,7 @@ export const SignUpForm = () => {
       const res = await fetch('/api/auth/signup', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password })
+        body: JSON.stringify({ name, email, password })
       });
       
       if (res.ok) {
@@ -46,6 +47,18 @@ export const SignUpForm = () => {
 
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-4 w-full">
+      <div className="flex flex-col gap-1.5 w-full">
+        <label className="text-text-primary font-inter text-[13px] font-semibold">이름</label>
+        <input
+          type="text"
+          className="h-12 px-4 rounded-[10px] border border-border bg-card-bg text-text-primary placeholder:text-text-muted text-[14px] font-inter focus:outline-none focus:border-accent transition-colors"
+          placeholder="홍길동"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          maxLength={10}
+          required
+        />
+      </div>
       <div className="flex flex-col gap-1.5 w-full">
         <label className="text-text-primary font-inter text-[13px] font-semibold">이메일</label>
         <input
