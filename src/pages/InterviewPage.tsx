@@ -2,14 +2,12 @@ import { useState, useEffect, useCallback } from 'react';
 import {
   InterviewSetupForm,
   InterviewPreCheck,
-  InterviewSession,
-  InterviewPermissionError,
   InterviewScreenError,
 } from '@/features/interview';
 import type { InterviewSettings } from '@/features/interview';
 import { useNavigate } from 'react-router-dom';
 
-type Phase = 'setup' | 'precheck' | 'session' | 'error-permission' | 'error-screen';
+type Phase = 'setup' | 'precheck' | 'error-screen';
 
 const MIN_WIDTH = 1024;
 const MIN_HEIGHT = 768;
@@ -30,13 +28,25 @@ export const InterviewPage = () => {
 
   useEffect(() => {
     const handleResize = () => {
-      if (phase === 'session' || phase === 'precheck') {
+      if (phase === 'precheck') {
         checkScreenSize();
       }
     };
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, [phase, checkScreenSize]);
+
+  /* ── Listen for interview-ended postMessage from child window ── */
+  useEffect(() => {
+    const handleMessage = (event: MessageEvent) => {
+      if (event.data?.type === 'interview-ended') {
+        // Interview session window was closed / finished
+        // Optionally navigate or refresh
+      }
+    };
+    window.addEventListener('message', handleMessage);
+    return () => window.removeEventListener('message', handleMessage);
+  }, []);
 
   /* ── Phase handlers ── */
   const handleSetupComplete = (s: InterviewSettings) => {
@@ -47,13 +57,19 @@ export const InterviewPage = () => {
   };
 
   const handlePreCheckComplete = () => {
-    if (checkScreenSize()) {
-      setPhase('session');
-    }
-  };
+    if (!checkScreenSize()) return;
 
-  const handleEnd = () => {
-    navigate('/dashboard');
+    // Open interview session in a NEW WINDOW (no nav)
+    const width = Math.min(window.screen.width, 1600);
+    const height = Math.min(window.screen.height, 1000);
+    const left = (window.screen.width - width) / 2;
+    const top = (window.screen.height - height) / 2;
+
+    window.open(
+      '/interview/session',
+      'interview-session',
+      `width=${width},height=${height},left=${left},top=${top},toolbar=no,menubar=no,location=no,status=no,scrollbars=no`
+    );
   };
 
   const handleBack = () => {
@@ -68,22 +84,6 @@ export const InterviewPage = () => {
           onHome={() => navigate('/dashboard')}
           minWidth={MIN_WIDTH}
           minHeight={MIN_HEIGHT}
-        />
-      );
-
-    case 'error-permission':
-      return (
-        <InterviewPermissionError
-          onRetry={() => setPhase('precheck')}
-          onEnd={handleEnd}
-        />
-      );
-
-    case 'session':
-      return (
-        <InterviewSession
-          onEnd={handleEnd}
-          onPermissionError={() => setPhase('error-permission')}
         />
       );
 

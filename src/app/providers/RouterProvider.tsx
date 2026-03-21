@@ -14,6 +14,7 @@ import { StreakPage } from '@/pages/StreakPage';
 import { SettingsPage } from '@/pages/SettingsPage';
 import { SubscriptionPage } from '@/pages/SubscriptionPage';
 import { InterviewPage } from '@/pages/InterviewPage';
+import { InterviewSessionPage } from '@/pages/InterviewSessionPage';
 import { JobsPage } from '@/pages/JobsPage';
 import { JobAddPage } from '@/pages/JobAddPage';
 import { JobEditPage } from '@/pages/JobEditPage';
@@ -94,6 +95,11 @@ const router = createBrowserRouter([
       { path: '/signup', element: <SignUpPage /> },
       { path: '/verify-email', element: <EmailVerificationPage /> },
     ],
+  },
+  // Standalone: new-window interview session (no layout/nav)
+  {
+    path: '/interview/session',
+    element: <InterviewSessionPage />,
   },
 ]);
 

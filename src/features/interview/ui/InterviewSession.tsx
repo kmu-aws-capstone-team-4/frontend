@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { Icon } from '@/shared/ui/Icon';
 import {
-  Video, Mic, MicOff, Play, Square, Loader2, Timer, MonitorX,
+  Mic, Play, Square, Loader2, Timer, MonitorX,
   UserRound, EyeOff, Activity,
 } from 'lucide-react';
 import { useAnalysisStore } from '@/shared/store/useAnalysisStore';
