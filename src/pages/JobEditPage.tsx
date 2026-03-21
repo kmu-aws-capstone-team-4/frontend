@@ -2,7 +2,7 @@ import { Typography } from '@/shared/ui/Typography';
 import { Button } from '@/shared/ui/Button';
 import { Input } from '@/shared/ui/Input';
 import { ChevronLeft } from 'lucide-react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 export const JobEditPage = () => {
   const navigate = useNavigate();
