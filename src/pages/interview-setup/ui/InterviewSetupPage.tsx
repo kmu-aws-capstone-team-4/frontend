@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { useInterviewSetupStore } from "@/features/interview-setup";
+import { useSubscriptionStore } from "@/features/subscription";
 import { StepLayout } from "@/shared/ui/StepLayout";
 import { ResumeSection } from "./ResumeSection";
 import { JdSection } from "./JdSection";
@@ -26,12 +27,33 @@ export function InterviewSetupPage() {
     creatingSession, createError,
     fetchResumes, selectResume, createSession, resetSetup,
   } = useInterviewSetupStore();
+  const { status: subscriptionStatus, fetchStatus: fetchSubscriptionStatus } = useSubscriptionStore();
 
   useEffect(() => {
     loadJdList(preferredJdId);
     fetchResumes();
+    fetchSubscriptionStatus();
     resetSetup();
-  }, [loadJdList, fetchResumes, resetSetup, preferredJdId]);
+  }, [loadJdList, fetchResumes, fetchSubscriptionStatus, resetSetup, preferredJdId]);
+
+  const canUseFullProcess = Boolean(subscriptionStatus?.policy.features.fullProcessInterview);
+  const canUseRealMode = Boolean(subscriptionStatus?.policy.features.realModeInterview);
+
+  useEffect(() => {
+    if (interviewMode === "full" && !canUseFullProcess) {
+      setInterviewMode("tail");
+    }
+    if (practiceMode === "real" && !canUseRealMode) {
+      setPracticeMode("practice");
+    }
+  }, [
+    interviewMode,
+    practiceMode,
+    canUseFullProcess,
+    canUseRealMode,
+    setInterviewMode,
+    setPracticeMode,
+  ]);
 
   const handleStartInterview = async () => {
     const session = await createSession();
@@ -100,6 +122,7 @@ export function InterviewSetupPage() {
                 <InterviewModeSection
                   interviewMode={interviewMode}
                   practiceMode={practiceMode}
+                  isProPlan={subscriptionStatus?.planType === "pro"}
                   onModeChange={setInterviewMode}
                   onPracticeModeChange={setPracticeMode}
                 />
