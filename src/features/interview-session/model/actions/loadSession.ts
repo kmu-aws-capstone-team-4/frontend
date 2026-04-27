@@ -1,8 +1,21 @@
-/** 세션 로드: 진행 중이면 현재 위치를 복원, 완료면 종료 상태로 표시. */
+/** 세션 로드: 진행 중이면 현재 위치를 복원, 완료면 종료 상태로 표시. 재방문 시 자동 takeover 로 ownership 인수. */
 import { interviewApi } from "../../api/interviewApi";
 import type { InterviewSessionStore } from "../types";
 
 type Set = (partial: Partial<InterviewSessionStore>) => void;
+
+async function autoTakeoverIfPossible(set: Set, interviewSessionUuid: string) {
+  try {
+    const ownership = await interviewApi.takeoverInterviewSession(interviewSessionUuid);
+    set({
+      ownerToken: ownership.ownerToken,
+      ownerVersion: ownership.ownerVersion,
+      wsTicket: ownership.wsTicket,
+    });
+  } catch {
+    /* takeover 실패 (예: 권한 없음) — 페이지는 read-only 상태로 표시될 수 있음 */
+  }
+}
 
 export async function loadInterviewSession(set: Set, interviewSessionUuid: string) {
   try {
@@ -14,11 +27,9 @@ export async function loadInterviewSession(set: Set, interviewSessionUuid: strin
       return;
     }
 
-    // 진행 중인 세션 — turns 로드 후 현재 위치 복원
     const turns = await interviewApi.getInterviewTurns(interviewSessionUuid);
 
     if (turns.length === 0) {
-      // start API가 아직 호출 안 된 세션 → 시작 화면으로
       set({ interviewSession, interviewTurns: [], interviewPhase: "idle" });
       return;
     }
@@ -26,11 +37,12 @@ export async function loadInterviewSession(set: Set, interviewSessionUuid: strin
     const firstUnansweredIdx = turns.findIndex((t) => !t.answer);
 
     if (firstUnansweredIdx < 0) {
-      // 모든 질문에 답했지만 종료 API가 호출 안 된 경우 → 자동 종료
       try { await interviewApi.finishInterview(interviewSessionUuid); } catch { /* ignore */ }
       set({ interviewSession, interviewTurns: turns, interviewPhase: "finished" });
       return;
     }
+
+    await autoTakeoverIfPossible(set, interviewSessionUuid);
 
     set({
       interviewSession,
