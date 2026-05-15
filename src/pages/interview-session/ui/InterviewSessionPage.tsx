@@ -245,12 +245,18 @@ export function InterviewSessionPage() {
   }, [recording, stopStt, destroyTts, cleanupMedia, video]);
 
   useEffect(() => {
-    let id: ReturnType<typeof setInterval>;
-    if (isListening) {
-      id = setInterval(() => setSpeechMetrics(speechAnalyzerRef.current.analyze(finalText + " " + interimText, "ko-KR", isListening)), 500);
-    } else {
-      setSpeechMetrics(speechAnalyzerRef.current.analyze("", "ko-KR", false));
+    if (!isListening) {
+      // isListening=false 일 때는 effect 본문에서 직접 setState 를 호출하지 않는다.
+      // 직접 호출하면 매 렌더마다 새 객체가 반환되어 무한 루프가 발생한다.
+      // 대신 cleanup 에서 초기화하거나, setInterval 없이 한 번만 실행되도록 처리한다.
+      const id = setTimeout(() => {
+        setSpeechMetrics(speechAnalyzerRef.current.analyze("", "ko-KR", false));
+      }, 0);
+      return () => clearTimeout(id);
     }
+    const id = setInterval(() => {
+      setSpeechMetrics(speechAnalyzerRef.current.analyze(finalText + " " + interimText, "ko-KR", isListening));
+    }, 500);
     return () => clearInterval(id);
   }, [finalText, interimText, isListening]);
 

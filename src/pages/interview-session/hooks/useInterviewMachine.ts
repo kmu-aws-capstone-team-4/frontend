@@ -109,6 +109,9 @@ export function useInterviewMachine(deps: InterviewMachineDeps): UseInterviewMac
     let cancelled = false;
 
     const d = depsRef.current;
+    // STT 가 이전 phase 에서 살아있을 수 있으므로 진입 즉시 중단한다.
+    // (submitting → tts_playing, resume → tts_playing 경로 모두 커버)
+    d.stopStt();
     d.resetText();
     d.avatarSpeak(state.question);
     preparePromiseRef.current = d.prepareRecording(state.turnId).catch(() => {});
@@ -126,6 +129,9 @@ export function useInterviewMachine(deps: InterviewMachineDeps): UseInterviewMac
   useEffect(() => {
     if (state.phase !== "preparing_record") return;
     let cancelled = false;
+
+    // tts_playing 에서 이미 stopStt() 를 호출하지만, 혹시 모를 경로를 위해 이중 방어한다.
+    depsRef.current.stopStt();
 
     const promise = preparePromiseRef.current ?? Promise.resolve();
     promise.then(() => {
@@ -148,6 +154,13 @@ export function useInterviewMachine(deps: InterviewMachineDeps): UseInterviewMac
     depsRef.current.startStt();
     depsRef.current.startTurnCounting();
     depsRef.current.startRecording(state.turnId).catch(() => {});
+
+    // cleanup: speaking phase 를 벗어나면 STT 를 즉시 중단한다.
+    // handleSubmit 에서도 stopStt() 를 호출하지만, React effect cleanup 이
+    // phase 전환 시점에 동기적으로 실행되므로 더 이른 시점에 차단할 수 있다.
+    return () => {
+      depsRef.current.stopStt();
+    };
   }, [state.phase, state.turnId]);
 
   // ── Effect: finished entry → cleanup + navigate ──
@@ -213,6 +226,7 @@ export function useInterviewMachine(deps: InterviewMachineDeps): UseInterviewMac
       dispatch({ type: "SUBMIT" });
       const d = depsRef.current;
       d.stopStt();
+      d.resetText();
       const videoCounts = d.stopTurnCounting();
       await d.stopRecording();
 
