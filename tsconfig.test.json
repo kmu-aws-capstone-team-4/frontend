@@ -14,7 +14,7 @@
     "paths": {
       "@/*": ["src/*"]
     },
-    "types": ["jest", "@testing-library/jest-dom", "node"]
+    "types": ["jest", "@testing-library/jest-dom", "node", "vite/client"]
   },
   "include": [
     "src/**/__tests__/**/*.ts",
