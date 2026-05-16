@@ -245,12 +245,19 @@ export function InterviewSessionPage() {
   }, [recording, stopStt, destroyTts, cleanupMedia, video]);
 
   useEffect(() => {
-    let id: ReturnType<typeof setInterval>;
-    if (isListening) {
-      id = setInterval(() => setSpeechMetrics(speechAnalyzerRef.current.analyze(finalText + " " + interimText, "ko-KR", isListening)), 500);
-    } else {
-      setSpeechMetrics(speechAnalyzerRef.current.analyze("", "ko-KR", false));
+    if (!isListening) {
+      // 함수형 업데이트로 이전 상태가 이미 초기화된 경우 동일 참조를 반환하여
+      // 불필요한 리렌더를 방지한다. analyze() 는 매번 새 객체를 반환하므로
+      // 직접 호출하면 effect 재실행 → 무한 루프가 발생한다.
+      setSpeechMetrics((prev) => {
+        if (prev.wpm === 0 && prev.durationSeconds === 0 && prev.highlightedHtml === "") return prev;
+        return speechAnalyzerRef.current.analyze("", "ko-KR", false);
+      });
+      return;
     }
+    const id = setInterval(() => {
+      setSpeechMetrics(speechAnalyzerRef.current.analyze(finalText + " " + interimText, "ko-KR", isListening));
+    }, 500);
     return () => clearInterval(id);
   }, [finalText, interimText, isListening]);
 

@@ -21,7 +21,7 @@ function getFillerBadge(ratio: number) {
 function getSilenceBadge(ratio: number) {
   if (ratio < 0.20) return { label: "자연스러워요", cls: "bg-[#DCFCE7] text-[#15803D]" };
   if (ratio < 0.30) return { label: "조금 많음", cls: "bg-[#FDF6E3] text-[#E9B63B]" };
-  return { label: "너무 깁니다", cls: "bg-red-50 text-red-600" };
+  return { label: "개선 필요", cls: "bg-red-50 text-red-600" };
 }
 
 function getVolumeBadge(dbfs: number | null) {
