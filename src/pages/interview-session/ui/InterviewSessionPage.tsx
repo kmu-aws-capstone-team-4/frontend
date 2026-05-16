@@ -246,13 +246,14 @@ export function InterviewSessionPage() {
 
   useEffect(() => {
     if (!isListening) {
-      // isListening=false 일 때는 effect 본문에서 직접 setState 를 호출하지 않는다.
-      // 직접 호출하면 매 렌더마다 새 객체가 반환되어 무한 루프가 발생한다.
-      // 대신 cleanup 에서 초기화하거나, setInterval 없이 한 번만 실행되도록 처리한다.
-      const id = setTimeout(() => {
-        setSpeechMetrics(speechAnalyzerRef.current.analyze("", "ko-KR", false));
-      }, 0);
-      return () => clearTimeout(id);
+      // 함수형 업데이트로 이전 상태가 이미 초기화된 경우 동일 참조를 반환하여
+      // 불필요한 리렌더를 방지한다. analyze() 는 매번 새 객체를 반환하므로
+      // 직접 호출하면 effect 재실행 → 무한 루프가 발생한다.
+      setSpeechMetrics((prev) => {
+        if (prev.wpm === 0 && prev.durationSeconds === 0 && prev.highlightedHtml === "") return prev;
+        return speechAnalyzerRef.current.analyze("", "ko-KR", false);
+      });
+      return;
     }
     const id = setInterval(() => {
       setSpeechMetrics(speechAnalyzerRef.current.analyze(finalText + " " + interimText, "ko-KR", isListening));
