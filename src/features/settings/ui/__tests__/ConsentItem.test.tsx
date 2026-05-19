@@ -120,14 +120,15 @@ describe("ConsentItem — 약관 모달", () => {
     expect(screen.getByText(/약관을 불러오는 중/)).toBeInTheDocument();
   });
 
-  it("content 로드 성공 → HTML 렌더 (dangerouslySetInnerHTML)", async () => {
-    mockGetTermsDocument.mockResolvedValue({ content: "<p>약관 내용</p>" });
+  it("content 로드 성공 → 마크다운 렌더", async () => {
+    mockGetTermsDocument.mockResolvedValue({ content: "# 약관 제목\n\n약관 본문 내용" });
     render(<ConsentItem {...baseProps} />);
 
     await userEvent.click(screen.getByText("이용약관"));
     await waitFor(() => {
-      expect(screen.getByText("약관 내용")).toBeInTheDocument();
+      expect(screen.getByRole("heading", { name: "약관 제목" })).toBeInTheDocument();
     });
+    expect(screen.getByText("약관 본문 내용")).toBeInTheDocument();
   });
 
   it("content=null (못 불러옴) → 에러 안내", async () => {

@@ -8,6 +8,8 @@ const config: Config = {
     '^@/(.*)$': '<rootDir>/src/$1',
     '\\.(css|less|scss|sass)$': 'identity-obj-proxy',
     '\\.(jpg|jpeg|png|gif|svg|webp)$': '<rootDir>/src/__mocks__/fileMock.ts',
+    '^react-markdown$': '<rootDir>/src/__mocks__/react-markdown.tsx',
+    '^remark-gfm$': '<rootDir>/src/__mocks__/remark-gfm.ts',
   },
   transform: {
     '^.+\\.tsx?$': [

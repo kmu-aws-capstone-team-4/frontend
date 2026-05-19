@@ -2,7 +2,7 @@ import { useState, useEffect, useMemo } from "react";
 import { useAuthStore } from "@/features/auth";
 import { useNavigate, Link } from "react-router-dom";
 import { getTermsDocumentsApi, getTermsDocumentApi, type TermsDocument } from "@/features/auth/api/termsApi";
-import { Modal, PasswordChecklist } from "@/shared/ui";
+import { Modal, PasswordChecklist, MarkdownContent } from "@/shared/ui";
 import { validatePassword } from "@/shared/lib/validatePassword";
 
 const isValidEmail = (v: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
@@ -266,10 +266,7 @@ export function SignUpPage() {
         {modalLoading ? (
           <div className="text-[14px] text-[#6B7280] py-8 text-center">약관을 불러오는 중...</div>
         ) : modalContent ? (
-          <div
-            className="prose prose-sm max-w-none text-[14px] text-[#0A0A0A] leading-[1.7]"
-            dangerouslySetInnerHTML={{ __html: modalContent }}
-          />
+          <MarkdownContent content={modalContent} />
         ) : (
           <div className="text-[14px] text-[#6B7280] py-8 text-center">약관 내용을 불러올 수 없습니다.</div>
         )}

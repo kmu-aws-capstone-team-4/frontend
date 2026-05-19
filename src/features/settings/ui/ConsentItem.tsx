@@ -1,6 +1,7 @@
 import { TriangleAlert, ShieldCheck, FileText, Megaphone } from "lucide-react";
 import { useState } from "react";
 import { Modal } from "@/shared/ui/Modal";
+import { MarkdownContent } from "@/shared/ui/MarkdownContent";
 import { getTermsDocumentApi } from "@/features/auth/api/termsApi";
 
 interface ConsentItemProps {
@@ -97,10 +98,7 @@ export function ConsentItem({ termsDocumentId, title, termsType, version, isRequ
         {loading ? (
           <div className="text-[14px] text-[#6B7280] py-8 text-center">약관을 불러오는 중...</div>
         ) : content ? (
-          <div
-            className="prose prose-sm max-w-none text-[14px] text-[#0A0A0A] leading-[1.7]"
-            dangerouslySetInnerHTML={{ __html: content }}
-          />
+          <MarkdownContent content={content} />
         ) : (
           <div className="text-[14px] text-[#6B7280] py-8 text-center">약관 내용을 불러올 수 없습니다.</div>
         )}
