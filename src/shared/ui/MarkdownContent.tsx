@@ -1,10 +1,44 @@
-import ReactMarkdown from "react-markdown";
+import ReactMarkdown, { type Components } from "react-markdown";
 import remarkGfm from "remark-gfm";
 
 interface MarkdownContentProps {
   content: string;
   className?: string;
 }
+
+const markdownComponents: Components = {
+  table: ({ children, ...props }) => (
+    <div className="overflow-x-auto my-3 -mx-1 px-1">
+      <table
+        className="min-w-full text-[12px] border-collapse border border-[#E5E7EB]"
+        {...props}
+      >
+        {children}
+      </table>
+    </div>
+  ),
+  thead: ({ children, ...props }) => (
+    <thead className="bg-[#F9FAFB]" {...props}>
+      {children}
+    </thead>
+  ),
+  th: ({ children, ...props }) => (
+    <th
+      className="text-left font-bold text-[#0A0A0A] px-3 py-2 border border-[#E5E7EB] whitespace-nowrap"
+      {...props}
+    >
+      {children}
+    </th>
+  ),
+  td: ({ children, ...props }) => (
+    <td
+      className="text-[#374151] px-3 py-2 border border-[#E5E7EB] align-top"
+      {...props}
+    >
+      {children}
+    </td>
+  ),
+};
 
 export function MarkdownContent({ content, className = "" }: MarkdownContentProps) {
   return (
@@ -27,42 +61,7 @@ export function MarkdownContent({ content, className = "" }: MarkdownContentProp
         prose-code:px-1 prose-code:py-0.5 prose-code:rounded prose-code:before:content-none prose-code:after:content-none
         ${className}`}
     >
-      <ReactMarkdown
-        remarkPlugins={[remarkGfm]}
-        components={{
-          table: ({ children, ...props }) => (
-            <div className="overflow-x-auto my-3 -mx-1 px-1">
-              <table
-                className="min-w-full text-[12px] border-collapse border border-[#E5E7EB]"
-                {...props}
-              >
-                {children}
-              </table>
-            </div>
-          ),
-          thead: ({ children, ...props }) => (
-            <thead className="bg-[#F9FAFB]" {...props}>
-              {children}
-            </thead>
-          ),
-          th: ({ children, ...props }) => (
-            <th
-              className="text-left font-bold text-[#0A0A0A] px-3 py-2 border border-[#E5E7EB] whitespace-nowrap"
-              {...props}
-            >
-              {children}
-            </th>
-          ),
-          td: ({ children, ...props }) => (
-            <td
-              className="text-[#374151] px-3 py-2 border border-[#E5E7EB] align-top"
-              {...props}
-            >
-              {children}
-            </td>
-          ),
-        }}
-      >
+      <ReactMarkdown remarkPlugins={[remarkGfm]} components={markdownComponents}>
         {content}
       </ReactMarkdown>
     </div>

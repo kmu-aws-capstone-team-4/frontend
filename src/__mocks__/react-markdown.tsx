@@ -1,5 +1,7 @@
 import type { ReactNode } from "react";
 
+export type Components = Record<string, unknown>;
+
 export default function ReactMarkdown({ children }: { children?: ReactNode }) {
   const text = typeof children === "string" ? children : "";
   const lines = text.split("\n");
