@@ -83,12 +83,12 @@ export function QuestionFeedbackList({
 
 
               <div className="bg-[#F9FAFB] rounded-xl p-3">
-                <p className="text-[20px] font-bold text-[#0891B2] mb-1 italic" style={{ fontFamily: "'Inter Tight', sans-serif" }}>Q.</p>
+                <p className="text-[20px] font-bold text-[#0891B2] mb-1" style={{ fontFamily: "'Inter Tight', sans-serif" }}>Q.</p>
                 <p className="text-[13px] text-[#374151]">{activeFeedback.question}</p>
               </div>
               {turnAnswerMap[activeFeedback.turnId] && (
                 <div className="bg-[#F9FAFB] rounded-xl p-3">
-                  <p className="text-[20px] font-bold text-[#0891B2] mb-1 italic" style={{ fontFamily: "'Inter Tight', sans-serif" }}>A.</p>
+                  <p className="text-[20px] font-bold text-[#0891B2] mb-1" style={{ fontFamily: "'Inter Tight', sans-serif" }}>A.</p>
                   <p className="text-[13px] text-[#374151]">{turnAnswerMap[activeFeedback.turnId]}</p>
                 </div>
               )}
@@ -166,7 +166,7 @@ function TurnMetricCards({ feedback }: { feedback: InterviewQuestionFeedback }) 
     ? { label: "적절", cls: "bg-[#DCFCE7] text-[#15803D]" }
     : silenceRatio < 0.30
     ? { label: "조금 많음", cls: "bg-[#FDF6E3] text-[#E9B63B]" }
-    : { label: "너무 깁니다", cls: "bg-red-50 text-red-600" };
+    : { label: "개선 필요", cls: "bg-red-50 text-red-600" };
 
   const gazeBadge = gazeCount < 5
     ? { label: "안정", cls: "bg-[#DCFCE7] text-[#15803D]" }
