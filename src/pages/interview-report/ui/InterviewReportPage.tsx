@@ -191,12 +191,6 @@ export function InterviewReportPage() {
                         {[report.overallComment, report.audioAnalysisComment, report.videoAnalysisComment].filter(Boolean).join(" ")}
                       </p>
                       <div className="flex flex-wrap gap-2">
-                        {report.durationSeconds && report.durationSeconds > 0 && (
-                          <div className="flex items-center gap-1.5 text-[12px] text-[#6B7280] bg-[#F9FAFB] px-2.5 py-1 rounded-lg border border-gray-100">
-                            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#0991B2" strokeWidth="2"><circle cx="12" cy="12" r="10"/><path strokeLinecap="round" d="M12 6v6l4 2"/></svg>
-                            평균 답변시간 <span className="font-semibold text-[#374151]">{Math.floor(report.durationSeconds / (report.totalQuestions || 1) / 60)}분 {Math.floor((report.durationSeconds / (report.totalQuestions || 1)) % 60)}초</span>
-                          </div>
-                        )}
                         <div className="flex items-center gap-1.5 text-[12px] text-[#6B7280] bg-[#F9FAFB] px-2.5 py-1 rounded-lg border border-gray-100">
                           <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#10B981" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                           총 질문 <span className="font-semibold text-[#374151]">{report.totalQuestions}문항</span>

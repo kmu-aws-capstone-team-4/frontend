@@ -83,12 +83,12 @@ export function QuestionFeedbackList({
 
 
               <div className="bg-[#F9FAFB] rounded-xl p-3">
-                <p className="text-[20px] font-bold text-[#0891B2] mb-1 italic" style={{ fontFamily: "'Inter Tight', sans-serif" }}>Q.</p>
+                <p className="text-[20px] font-bold text-[#0891B2] mb-1" style={{ fontFamily: "'Inter Tight', sans-serif" }}>Q.</p>
                 <p className="text-[13px] text-[#374151]">{activeFeedback.question}</p>
               </div>
               {turnAnswerMap[activeFeedback.turnId] && (
                 <div className="bg-[#F9FAFB] rounded-xl p-3">
-                  <p className="text-[20px] font-bold text-[#0891B2] mb-1 italic" style={{ fontFamily: "'Inter Tight', sans-serif" }}>A.</p>
+                  <p className="text-[20px] font-bold text-[#0891B2] mb-1" style={{ fontFamily: "'Inter Tight', sans-serif" }}>A.</p>
                   <p className="text-[13px] text-[#374151]">{turnAnswerMap[activeFeedback.turnId]}</p>
                 </div>
               )}
@@ -157,7 +157,7 @@ function TurnMetricCards({ feedback }: { feedback: InterviewQuestionFeedback }) 
     : { label: "느림", cls: "bg-[#FDF6E3] text-[#E9B63B]" };
 
   const fillerBadge = fillerRatio < 0.05
-    ? { label: "양호", cls: "bg-[#DCFCE7] text-[#15803D]" }
+    ? { label: "훌륭해요", cls: "bg-[#DCFCE7] text-[#15803D]" }
     : fillerRatio < 0.10
     ? { label: "보통", cls: "bg-[#FDF6E3] text-[#E9B63B]" }
     : { label: "개선 필요", cls: "bg-red-50 text-red-600" };
@@ -166,7 +166,7 @@ function TurnMetricCards({ feedback }: { feedback: InterviewQuestionFeedback }) 
     ? { label: "적절", cls: "bg-[#DCFCE7] text-[#15803D]" }
     : silenceRatio < 0.30
     ? { label: "조금 많음", cls: "bg-[#FDF6E3] text-[#E9B63B]" }
-    : { label: "너무 깁니다", cls: "bg-red-50 text-red-600" };
+    : { label: "개선 필요", cls: "bg-red-50 text-red-600" };
 
   const gazeBadge = gazeCount < 5
     ? { label: "안정", cls: "bg-[#DCFCE7] text-[#15803D]" }
@@ -179,35 +179,35 @@ function TurnMetricCards({ feedback }: { feedback: InterviewQuestionFeedback }) 
       {/* 말하기 속도 */}
       <div className="bg-[#F9FAFB] rounded-xl p-3 flex flex-col items-center text-center">
         <Mic size={14} className="text-emerald-500 mb-1.5" />
-        <p className="text-[11px] text-[#6B7280] mb-1">말하기 속도</p>
-        <p className="text-[13px] font-bold text-[#374151] tabular-nums">{spm > 0 ? `${spm} SPM` : "—"}</p>
-        <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full mt-1 ${spmBadge.cls}`}>{spmBadge.label}</span>
+        <p className="text-[11px] text-[#6B7280] mb-1.5">말하기 속도</p>
+        <span className={`text-[13px] font-bold px-3 py-1 rounded-full mb-1.5 ${spmBadge.cls}`}>{spmBadge.label}</span>
+        <p className="text-[11px] text-[#374151] font-semibold tabular-nums">{spm > 0 ? `${spm} SPM` : "—"}</p>
       </div>
 
       {/* 필러워드 */}
       <div className="bg-[#F9FAFB] rounded-xl p-3 flex flex-col items-center text-center">
         <AlertTriangle size={14} className="text-[#E9B63B] mb-1.5" />
-        <p className="text-[11px] text-[#6B7280] mb-1">필러워드</p>
-        <p className="text-[13px] font-bold text-[#374151] tabular-nums">
+        <p className="text-[11px] text-[#6B7280] mb-1.5">필러워드</p>
+        <span className={`text-[13px] font-bold px-3 py-1 rounded-full mb-1.5 ${fillerBadge.cls}`}>{fillerBadge.label}</span>
+        <p className="text-[11px] text-[#374151] font-semibold tabular-nums">
           {fillerCount}회 · {(fillerRatio * 100).toFixed(1)}%
         </p>
-        <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full mt-1 ${fillerBadge.cls}`}>{fillerBadge.label}</span>
       </div>
 
       {/* 묵음 비율 */}
       <div className="bg-[#F9FAFB] rounded-xl p-3 flex flex-col items-center text-center">
         <VolumeX size={14} className="text-emerald-500 mb-1.5" />
-        <p className="text-[11px] text-[#6B7280] mb-1">묵음 비율</p>
-        <p className="text-[13px] font-bold text-[#374151] tabular-nums">{(silenceRatio * 100).toFixed(0)}%</p>
-        <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full mt-1 ${silenceBadge.cls}`}>{silenceBadge.label}</span>
+        <p className="text-[11px] text-[#6B7280] mb-1.5">묵음 비율</p>
+        <span className={`text-[13px] font-bold px-3 py-1 rounded-full mb-1.5 ${silenceBadge.cls}`}>{silenceBadge.label}</span>
+        <p className="text-[11px] text-[#374151] font-semibold tabular-nums">{(silenceRatio * 100).toFixed(0)}%</p>
       </div>
 
       {/* 시선 이탈 */}
       <div className="bg-[#F9FAFB] rounded-xl p-3 flex flex-col items-center text-center">
         <Eye size={14} className="text-[#0991B2] mb-1.5" />
-        <p className="text-[11px] text-[#6B7280] mb-1">시선 이탈</p>
-        <p className="text-[13px] font-bold text-[#374151] tabular-nums">{gazeCount}회</p>
-        <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full mt-1 ${gazeBadge.cls}`}>{gazeBadge.label}</span>
+        <p className="text-[11px] text-[#6B7280] mb-1.5">시선 이탈</p>
+        <span className={`text-[13px] font-bold px-3 py-1 rounded-full mb-1.5 ${gazeBadge.cls}`}>{gazeBadge.label}</span>
+        <p className="text-[11px] text-[#374151] font-semibold tabular-nums">{gazeCount}회</p>
       </div>
     </div>
   );
