@@ -13,7 +13,7 @@ function getSpmBadge(spm: number) {
 }
 
 function getFillerBadge(ratio: number) {
-  if (ratio < 0.05) return { label: "양호", cls: "bg-[#DCFCE7] text-[#15803D]" };
+  if (ratio < 0.05) return { label: "훌륭해요", cls: "bg-[#DCFCE7] text-[#15803D]" };
   if (ratio < 0.10) return { label: "보통", cls: "bg-[#FDF6E3] text-[#E9B63B]" };
   return { label: "개선 필요", cls: "bg-red-50 text-red-600" };
 }
